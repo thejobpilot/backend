@@ -2,7 +2,7 @@
   "name": "jobpilot-backend",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Max Chang, Bernie Gandin, Akshat Bisht, Logan Nielson, Erik Nelson",
   "private": true,
   "license": "All Rights Reserved",
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "reflect-metadata": "^0.1.13",
