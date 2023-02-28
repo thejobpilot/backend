@@ -25,9 +25,6 @@ import configuration from "./config/configuration";
             autoLoadEntities: true,
             //should be using migrations but whatever
             synchronize: true,
-            entities: ["src/entity/**/*.js"],
-            migrations: ["src/migration/**/*.js"],
-            subscribers: ["src/subscriber/**/*.js"],
         }),
     ],
     controllers: [AppController],
