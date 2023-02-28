@@ -23,7 +23,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     validate(payload: unknown): unknown {
-        Logger.log('AYO');
         return payload;
     }
 
