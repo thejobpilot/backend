@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryColumn, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, PrimaryColumn} from 'typeorm';
 
 export enum UserType {
     APPLICANT = "applicant",
@@ -9,7 +9,7 @@ export enum UserType {
 @Entity()
 export class User {
     @PrimaryColumn()
-    auth0Id: number;
+    id: number;
 
     @Column()
     username: string;

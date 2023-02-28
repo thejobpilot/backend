@@ -7,6 +7,7 @@ import {JwtStrategy} from './auth/jwt.strategy';
 import {PassportModule} from '@nestjs/passport';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {UserModule} from "./users/user.module";
+import configuration from "./config/configuration";
 
 @Module({
     imports: [
@@ -16,13 +17,17 @@ import {UserModule} from "./users/user.module";
         PassportModule.register({defaultStrategy: 'jwt'}),
         TypeOrmModule.forRoot({
             type: 'postgres',
-            host: 'database-1.crliwbqbnnzo.us-east-2.rds.amazonaws.com',
+            host: configuration().postgres.hostname,
             port: 5432,
-            username: 'postgres',
-            // Hardcoding passwords but I don't even care anymore man
-            password: 'J0bpilot!',
-            database: 'postgres',
+            database: configuration().postgres.database,
+            username: configuration().postgres.username,
+            password: configuration().postgres.password,
             autoLoadEntities: true,
+            //should be using migrations but whatever
+            synchronize: true,
+            entities: ["src/entity/**/*.ts"],
+            migrations: ["src/migration/**/*.ts"],
+            subscribers: ["src/subscriber/**/*.ts"],
         }),
     ],
     controllers: [AppController],
