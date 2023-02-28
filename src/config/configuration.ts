@@ -6,5 +6,11 @@ export const config = () => ({
     issuer_url: process.env.AUTH0_ISSUER_URL,
     audience: process.env.AUTH0_AUDIENCE,
   },
+  postgres: {
+    hostname: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DB,
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASS,
+  }
 });
 export default config;
