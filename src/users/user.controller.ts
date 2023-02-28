@@ -8,6 +8,13 @@ import {UserService} from "./user.service";
     model: {
         type: User,
     },
+    params: {
+        slug: {
+            field: 'email',
+            type: 'string',
+            primary: true,
+        },
+    },
 })
 @Controller("users")
 export class UserController implements CrudController<User> {

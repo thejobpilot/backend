@@ -24,6 +24,7 @@ import configuration from "./config/configuration";
             password: configuration().postgres.password,
             autoLoadEntities: true,
             //should be using migrations but whatever
+            logging: true,
             synchronize: true,
         }),
     ],

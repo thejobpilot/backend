@@ -1,4 +1,5 @@
 import {Column, Entity, PrimaryColumn} from 'typeorm';
+import {IsDate, IsDateString, IsString} from "class-validator";
 
 export enum UserType {
     APPLICANT = "applicant",
@@ -8,18 +9,17 @@ export enum UserType {
 
 @Entity()
 export class User {
-    @PrimaryColumn()
-    id: number;
+    @PrimaryColumn({name: "email"})
+    email: string;
 
+    @IsString()
     @Column()
     username: string;
 
     @Column()
     fullName: string;
 
-    @Column()
-    email: string;
-
+    @IsDateString()
     @Column({type: "date"})
     graduationDate: string;
 
