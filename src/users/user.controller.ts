@@ -3,20 +3,26 @@ import { Crud, CrudController } from '@nestjsx/crud';
 
 import { User } from '../entity/user.entity';
 import { UserService } from './user.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Crud({
   model: {
     type: User,
   },
   params: {
-    slug: {
+    email: {
       field: 'email',
       type: 'string',
       primary: true,
+
     },
   },
+  routes: {
+    only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase'],
+  },
 })
-@Controller('users')
+@ApiTags('users')
+@Controller('user')
 export class UserController implements CrudController<User> {
   constructor(public service: UserService) {}
 }

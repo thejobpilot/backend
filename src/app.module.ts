@@ -8,12 +8,18 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/user.module';
 import configuration from './config/configuration';
+import { PositionModule } from './positions/position.module';
+import { InterviewModule } from './interviews/interview.module';
+import { QuestionModule } from './questions/question.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     AuthModule,
     UserModule,
+    PositionModule,
+    InterviewModule,
+    QuestionModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forRoot({
       type: 'postgres',

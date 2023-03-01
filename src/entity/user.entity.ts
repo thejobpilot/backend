@@ -1,5 +1,6 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { IsDate, IsDateString, IsString } from 'class-validator';
+import {ApiProperty} from "@nestjs/swagger";
 
 export enum UserType {
   APPLICANT = 'applicant',
@@ -9,7 +10,7 @@ export enum UserType {
 
 @Entity()
 export class User {
-  @PrimaryColumn({ name: 'email' })
+  @PrimaryColumn({ name: 'email', unique: true })
   email: string;
 
   @IsString()
@@ -20,6 +21,7 @@ export class User {
   fullName: string;
 
   @IsDateString()
+  @ApiProperty({default: "2001-01-01"})
   @Column({ type: 'date' })
   graduationDate: string;
 
@@ -35,4 +37,9 @@ export class User {
     default: UserType.APPLICANT,
   })
   userType: UserType;
+
+  @Column({
+    nullable: true,
+  })
+  retakes: boolean;
 }

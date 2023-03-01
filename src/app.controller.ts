@@ -6,7 +6,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Post()
+  //@Post()
   @UseGuards(AuthGuard('jwt'))
   getHello(@Request() req: Request): string {
     console.log(req);
