@@ -1,38 +1,38 @@
-import {Column, Entity, PrimaryColumn} from 'typeorm';
-import {IsDate, IsDateString, IsString} from "class-validator";
+import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { IsDate, IsDateString, IsString } from 'class-validator';
 
 export enum UserType {
-    APPLICANT = "applicant",
-    RECRUITER = "recruiter",
-    EMPLOYER = "employer"
+  APPLICANT = 'applicant',
+  RECRUITER = 'recruiter',
+  EMPLOYER = 'employer',
 }
 
 @Entity()
 export class User {
-    @PrimaryColumn({name: "email"})
-    email: string;
+  @PrimaryColumn({ name: 'email' })
+  email: string;
 
-    @IsString()
-    @Column()
-    username: string;
+  @IsString()
+  @Column()
+  username: string;
 
-    @Column()
-    fullName: string;
+  @Column()
+  fullName: string;
 
-    @IsDateString()
-    @Column({type: "date"})
-    graduationDate: string;
+  @IsDateString()
+  @Column({ type: 'date' })
+  graduationDate: string;
 
-    @Column()
-    gpa: number;
+  @Column()
+  gpa: number;
 
-    @Column()
-    resumeLink: string;
+  @Column()
+  resumeLink: string;
 
-    @Column({
-        type: "enum",
-        enum: UserType,
-        default: UserType.APPLICANT
-    })
-    userType: UserType
+  @Column({
+    type: 'enum',
+    enum: UserType,
+    default: UserType.APPLICANT,
+  })
+  userType: UserType;
 }

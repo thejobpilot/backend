@@ -11,6 +11,6 @@ export const config = () => ({
     database: process.env.POSTGRES_DB,
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASS,
-  }
+  },
 });
 export default config;
