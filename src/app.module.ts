@@ -7,6 +7,7 @@ import { JwtStrategy } from './auth/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/user.module';
+import { InvitationEmailModule } from './invitationEmail/invitationEmail.module'
 import configuration from './config/configuration';
 
 @Module({
@@ -14,6 +15,7 @@ import configuration from './config/configuration';
     ConfigModule.forRoot(),
     AuthModule,
     UserModule,
+    InvitationEmailModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forRoot({
       type: 'postgres',
