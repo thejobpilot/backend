@@ -11,6 +11,7 @@ import configuration from './config/configuration';
 import { PositionModule } from './positions/position.module';
 import { InterviewModule } from './interviews/interview.module';
 import { QuestionModule } from './questions/question.module';
+import {join} from "path";
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { QuestionModule } from './questions/question.module';
       database: configuration().postgres.database,
       username: configuration().postgres.username,
       password: configuration().postgres.password,
-      autoLoadEntities: true,
+      entities: [join(__dirname, './**/*.entity{.ts,.js}')],
       //should be using migrations but whatever
       logging: true,
       synchronize: true,

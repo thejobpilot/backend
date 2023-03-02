@@ -23,13 +23,16 @@ import { ApiTags } from '@nestjs/swagger';
   query: {
     join: {
       position: {},
+      questions: {
+        eager: true
+      }
     },
   },
   routes: {
     only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase'],
   },
 })
-@ApiTags('interviews')
+@ApiTags('interview')
 @Controller('/position/:positionId/interview')
 export class InterviewsController implements CrudController<Interview> {
   constructor(public service: InterviewsService) {}

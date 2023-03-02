@@ -1,6 +1,15 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { IsDate, IsDateString, IsString } from 'class-validator';
-import {ApiProperty} from "@nestjs/swagger";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryColumn,
+} from 'typeorm';
+import {IsDate, IsDateString, IsNumber, IsOptional, IsString} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { Interview } from './interview.entity';
+import { Type } from 'class-transformer';
 
 export enum UserType {
   APPLICANT = 'applicant',
@@ -21,7 +30,7 @@ export class User {
   fullName: string;
 
   @IsDateString()
-  @ApiProperty({default: "2001-01-01"})
+  @ApiProperty({ default: '2001-01-01' })
   @Column({ type: 'date' })
   graduationDate: string;
 
@@ -38,8 +47,19 @@ export class User {
   })
   userType: UserType;
 
-  @Column({
+  @Column({nullable: true})
+  retakes: boolean;
+
+
+  @IsOptional({ always: true })
+  @IsNumber({}, { always: true })
+  @Column({ nullable: true })
+  @ApiProperty({ readOnly: true })
+  interviewId?: number;
+
+  @ApiProperty({ readOnly: true })
+  @ManyToOne(() => Interview, {
     nullable: true,
   })
-  retakes: boolean;
+  interview: Interview;
 }
