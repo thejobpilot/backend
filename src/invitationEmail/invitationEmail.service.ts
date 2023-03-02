@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import sgMail from '@sendgrid/mail';
 
+//Update API Key
 export class invitationEmailService {
   static async sendEmail(to, from, subject, text) {
   const sgMail = require('@sendgrid/mail')
