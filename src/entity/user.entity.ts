@@ -1,15 +1,14 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { IsDate, IsDateString, IsString } from 'class-validator';
-
-export enum UserType {
-  APPLICANT = 'applicant',
-  RECRUITER = 'recruiter',
-  EMPLOYER = 'employer',
-}
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryColumn} from 'typeorm';
+import { IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { Interview } from './interview.entity';
+import { UserType } from './usertype.entity';
+import {Type} from "class-transformer";
+import {Position} from "./position.entity";
 
 @Entity()
 export class User {
-  @PrimaryColumn({ name: 'email' })
+  @PrimaryColumn({ name: 'email', unique: true })
   email: string;
 
   @IsString()
@@ -20,6 +19,7 @@ export class User {
   fullName: string;
 
   @IsDateString()
+  @ApiProperty({ default: '2001-01-01' })
   @Column({ type: 'date' })
   graduationDate: string;
 
@@ -35,4 +35,40 @@ export class User {
     default: UserType.APPLICANT,
   })
   userType: UserType;
+
+  @Column({ nullable: true })
+  retakes: boolean;
+
+  @Column({ nullable: true })
+  jobPreference: string;
+
+  @Column({ nullable: true })
+  rolePreference: string;
+
+  @Column({ nullable: true })
+  locationPreference: string;
+
+  @ApiProperty({ readOnly: true, required: false })
+  @ManyToMany(() => Interview, {
+    nullable: true,
+  })
+  @JoinTable({
+    name: 'user_interviews',
+    joinColumn: {
+      name: 'emailId',
+      referencedColumnName: 'email',
+    },
+    inverseJoinColumn: {
+      name: 'interviewId',
+      referencedColumnName: 'id',
+    },
+  })
+  interviews: Interview[];
+
+  @ApiProperty({ readOnly: true, required: false })
+  @OneToMany(() => Position, (position) => position.creator, {
+    nullable: true
+  })
+  @Type((t) => Position)
+  positions: Position[];
 }
