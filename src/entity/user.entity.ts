@@ -39,6 +39,15 @@ export class User {
   @Column({ nullable: true })
   retakes: boolean;
 
+  @Column({ nullable: true })
+  jobPreference: string;
+
+  @Column({ nullable: true })
+  rolePreference: string;
+
+  @Column({ nullable: true })
+  locationPreference: string;
+
   @ApiProperty({ readOnly: true, required: false })
   @ManyToMany(() => Interview, {
     nullable: true,
