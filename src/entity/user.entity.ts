@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryColumn} from 'typeorm';
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryColumn} from 'typeorm';
 import { IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Interview } from './interview.entity';
@@ -39,17 +39,22 @@ export class User {
   @Column({ nullable: true })
   retakes: boolean;
 
-  @IsOptional({ always: true })
-  @IsNumber({}, { always: true })
-  @Column({ nullable: true })
   @ApiProperty({ readOnly: true, required: false })
-  interviewId?: number;
-
-  @ApiProperty({ readOnly: true, required: false })
-  @ManyToOne(() => Interview, {
+  @ManyToMany(() => Interview, {
     nullable: true,
   })
-  interview: Interview;
+  @JoinTable({
+    name: 'user_interviews',
+    joinColumn: {
+      name: 'emailId',
+      referencedColumnName: 'email',
+    },
+    inverseJoinColumn: {
+      name: 'interviewId',
+      referencedColumnName: 'id',
+    },
+  })
+  interviews: Interview[];
 
   @ApiProperty({ readOnly: true, required: false })
   @OneToMany(() => Position, (position) => position.creator, {

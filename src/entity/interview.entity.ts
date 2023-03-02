@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
+  JoinTable, ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -11,6 +11,7 @@ import { Question } from './question.entity';
 import { Position } from './position.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional } from 'class-validator';
+import {User} from "./user.entity";
 
 @Entity()
 export class Interview {
@@ -32,6 +33,9 @@ export class Interview {
   @Column({ nullable: false })
   @ApiProperty({ readOnly: true, required: false })
   positionId?: number;
+
+  @ManyToMany((type) => User, (u) => u.interviews, { cascade: true })
+  applicants?: User[];
 
   @ApiProperty({ readOnly: true, required: false })
   @JoinColumn({ name: 'positionId' })

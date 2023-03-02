@@ -31,7 +31,7 @@ import {InterviewsService} from "../interviews/interviews.service";
   },
   query: {
     join: {
-      interview: {
+      interviews: {
         eager: true
       },
       positions: {
@@ -72,7 +72,10 @@ export class UserController implements CrudController<User> {
     if (!interview) {
       throw new HttpException('Interview with that ID does not exist', HttpStatus.I_AM_A_TEAPOT);
     }
-    user.interview = interview;
+    if(user.interviews == null) {
+      user.interviews = [];
+    }
+    user.interviews.push(interview);
     console.log(user);
 
     await this.service.updateOne(request, user);
