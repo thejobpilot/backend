@@ -34,6 +34,7 @@ export class Interview {
   @ApiProperty({ readOnly: true, required: false })
   positionId?: number;
 
+  @ApiProperty({ readOnly: true, required: false })
   @ManyToMany((type) => User, (u) => u.interviews, { cascade: true })
   applicants?: User[];
 
