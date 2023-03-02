@@ -34,6 +34,16 @@ import {InterviewsService} from "../interviews/interviews.service";
       interview: {
         eager: true
       },
+      positions: {
+        eager: true
+      },
+      'positions.interviews': {
+        eager: true,
+        alias: "interviewQuestions",
+      },
+      'positions.interviews.questions': {
+        eager: true,
+      },
     },
   },
   routes: {

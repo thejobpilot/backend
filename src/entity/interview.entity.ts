@@ -23,6 +23,7 @@ export class Interview {
   name: string;
 
   @ApiProperty({ required: true })
+  @IsNumber({}, { always: true })
   @Column()
   prepTime: number;
 

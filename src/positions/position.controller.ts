@@ -12,6 +12,16 @@ import { ApiTags } from '@nestjs/swagger';
   routes: {
     only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase'],
   },
+  params: {
+    id: {
+      field: "id",
+      type: "number"
+    },
+    creatorEmail: {
+      field: "creatorEmail",
+      type: "string"
+    }
+  },
   query: {
     alwaysPaginate: false,
     softDelete: true,
@@ -26,7 +36,7 @@ import { ApiTags } from '@nestjs/swagger';
   },
 })
 @ApiTags('position')
-@Controller('position')
+@Controller('/position/:creatorEmail')
 export class PositionController implements CrudController<Position> {
   constructor(public service: PositionService) {}
 }

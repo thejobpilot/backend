@@ -1,8 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import {Column, Entity, ManyToOne, OneToMany, PrimaryColumn} from 'typeorm';
 import { IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Interview } from './interview.entity';
 import { UserType } from './usertype.entity';
+import {Type} from "class-transformer";
+import {Position} from "./position.entity";
 
 @Entity()
 export class User {
@@ -48,4 +50,11 @@ export class User {
     nullable: true,
   })
   interview: Interview;
+
+  @ApiProperty({ readOnly: true, required: false })
+  @OneToMany(() => Position, (position) => position.creator, {
+    nullable: true
+  })
+  @Type((t) => Position)
+  positions: Position[];
 }
