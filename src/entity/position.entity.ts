@@ -5,9 +5,8 @@ import {Type} from "class-transformer";
 
 @Entity()
 export class Position {
-  @ApiProperty({
-    readOnly: true
-  })
+  @ApiProperty({ readOnly: true, required: false })
+
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,7 +16,7 @@ export class Position {
   @Column()
   name: string;
 
-  @ApiProperty({readOnly: true})
+  @ApiProperty({ readOnly: true, required: false })
   @OneToMany(() => Interview, (interview) => interview.position, {
     nullable: true
   })
