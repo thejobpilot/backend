@@ -17,6 +17,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { Interview } from '../entity/interview.entity';
 import AssignInterviewDTO from "../dto/AssignInterviewDTO";
 import {InterviewsService} from "../interviews/interviews.service";
+import { InvitationEmailService } from "../invitationEmail/invitationEmail.service";
 
 @Crud({
   model: {
@@ -53,7 +54,7 @@ import {InterviewsService} from "../interviews/interviews.service";
 @ApiTags('users')
 @Controller('user')
 export class UserController implements CrudController<User> {
-  constructor(public service: UserService, public interviewService: InterviewsService) {}
+  constructor(public service: UserService, public interviewService: InterviewsService, public emailService: InvitationEmailService) {}
 
   @UseInterceptors(CrudRequestInterceptor)
   @Post(':email/assign-interview')
@@ -76,10 +77,8 @@ export class UserController implements CrudController<User> {
       user.interviews = [];
     }
     user.interviews.push(interview);
-    console.log(user);
-
     await this.service.updateOne(request, user);
-
+    await this.emailService.sendInvitationEmail(user.email, user.fullName);
     return user;
   }
 

@@ -3,7 +3,7 @@ import configuration from '../config/configuration';
 import { NodeMailgun } from 'ts-mailgun';
 
 export class InvitationEmailService {
-  public static async sendInvitationEmail(to: string, fullName) {
+  public async sendInvitationEmail(to: string, fullName) {
     const mailer = new NodeMailgun();
     mailer.apiKey = configuration().mailgun.apiKey;
     mailer.domain = configuration().mailgun.domain;

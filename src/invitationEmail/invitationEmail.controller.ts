@@ -7,13 +7,13 @@ import {ApiTags} from "@nestjs/swagger";
 @Controller('emails')
 export class InvitationEmailController {
   constructor(
-    private readonly invitationEmailService: InvitationEmailService,
+    public invitationEmailService: InvitationEmailService,
   ) {}
 
   @Post('invitation')
   async sendEmail(@Body() emailData: InvitationEmailDTO): Promise<any> {
     try {
-      const response = await InvitationEmailService.sendInvitationEmail(
+      const response = await this.invitationEmailService.sendInvitationEmail(
         emailData.to,
         emailData.fullName,
       );
