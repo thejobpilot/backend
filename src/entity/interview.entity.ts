@@ -28,6 +28,11 @@ export class Interview {
   @Column()
   prepTime: number;
 
+  @ApiProperty({ required: true })
+  @IsNumber({}, { always: true })
+  @Column({nullable: true})
+  retakes: number;
+
   @IsOptional({ always: true })
   @IsNumber({}, { always: true })
   @Column({ nullable: false })
