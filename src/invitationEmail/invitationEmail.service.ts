@@ -18,7 +18,7 @@ export class InvitationEmailService {
         `Hello ${fullName}! You have been assigned a new interview on JobPilot. Login at https://jobpilot.tech to access it.`,
       )
       .catch((error) => {
-        throw error;
+        console.log(error)
       })
       .then((result) =>
         console.log('Successfully sent email to: ' + to, result),
