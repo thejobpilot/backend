@@ -31,6 +31,7 @@ import {join} from "path";
       database: configuration().postgres.database,
       username: configuration().postgres.username,
       password: configuration().postgres.password,
+      autoLoadEntities: true,
       entities: [join(__dirname, './**/*.entity{.ts,.js}')],
       //should be using migrations but whatever
       logging: true,
