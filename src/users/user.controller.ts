@@ -63,7 +63,7 @@ export class UserController implements CrudController<User> {
     @Param('email') email: string,
     @Body() body:  AssignInterviewDTO,
   ): Promise<User> {
-    const user = await this.service.findOne({ where: { email: email } });
+    const user = await this.service.findOne({ where: { email: email }, relations: ["interviews"]});
     const interview = await this.interviewService.findOne({ where: { id: body.interviewId } });
 
     if (!user) {
