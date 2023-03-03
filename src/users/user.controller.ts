@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller,
+  Controller, Delete,
   HttpException,
   HttpStatus,
   Inject,
@@ -8,7 +8,7 @@ import {
   Post,
   Request,
   UseInterceptors
-} from '@nestjs/common';
+} from "@nestjs/common";
 import {Crud, CrudController, CrudRequest, CrudRequestInterceptor, ParsedRequest} from '@nestjsx/crud';
 
 import { User } from '../entity/user.entity';
@@ -80,6 +80,26 @@ export class UserController implements CrudController<User> {
 
     await this.service.updateOne(request, user);
 
+    return user;
+  }
+
+  @UseInterceptors(CrudRequestInterceptor)
+  @Delete(':email/remove-interview')
+  async removeInterview(
+    @ParsedRequest() request: CrudRequest,
+    @Param('email') email: string,
+    @Body() body:  AssignInterviewDTO,
+  ): Promise<User> {
+    const user = await this.service.findOne({ where: { email: email } , relations: ['interviews']});
+    if (!user) {
+      throw new HttpException('User with that ID does not exist', HttpStatus.I_AM_A_TEAPOT);
+    }
+
+    if(user.interviews != null) {
+      let interviewId = body.interviewId;
+      user.interviews = user.interviews.filter(interview => interview.id !== interviewId);
+      await this.service.updateOne(request, user);
+    }
     return user;
   }
 }
