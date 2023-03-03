@@ -1,24 +1,28 @@
-import { Injectable } from '@nestjs/common';
-import sgMail from '@sendgrid/mail';
+import FormData from 'form-data';
+import configuration from '../config/configuration';
+import { NodeMailgun } from 'ts-mailgun';
 
-//Update API Key
-export class invitationEmailService {
-  static async sendEmail(to, from, subject, text) {
-  const sgMail = require('@sendgrid/mail')
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-  const msg = {
-    to, // Change to your recipient
-    from, // Change to your verified sender
-    subject,
-    text,
-  };
-    sgMail
-      .send(msg)
-      .then(() => {
-        console.log('Email sent')
-      })
+export class InvitationEmailService {
+  public static async sendInvitationEmail(to: string, fullName) {
+    const mailer = new NodeMailgun();
+    mailer.apiKey = configuration().mailgun.apiKey;
+    mailer.domain = configuration().mailgun.domain;
+    mailer.fromEmail =
+      'postmaster@sandboxcc78726d941c46f393aea7161a6762fd.mailgun.org';
+    mailer.fromTitle = 'JobPilot';
+    mailer.init();
+
+    mailer
+      .send(
+        to,
+        'New Interview Received',
+        `Hello ${fullName}! You have been assigned a new interview on JobPilot. Login at https://jobpilot.tech to access it.`,
+      )
+      .then((result) =>
+        console.log('Successfully sent email to: ' + to, result),
+      )
       .catch((error) => {
-        console.error(error)
-      })
+        throw error;
+      });
   }
 }

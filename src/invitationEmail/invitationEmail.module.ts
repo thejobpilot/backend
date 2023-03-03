@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { invitationEmailService } from './invitationEmail.service';
+import { InvitationEmailService } from './invitationEmail.service';
 import { InvitationEmailController } from './invitationEmail.controller';
-import { InvitationEmail } from './invitationEmail.entity';
+import { InvitationEmailDTO } from './InvitationEmail.dto';
 
 @Module({
-  imports: [InvitationEmail],
-  providers: [invitationEmailService],
-  exports: [invitationEmailService],
+  imports: [],
+  providers: [InvitationEmailService],
+  exports: [InvitationEmailService],
   controllers: [InvitationEmailController],
 })
 export class InvitationEmailModule {}
