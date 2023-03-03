@@ -12,5 +12,9 @@ export const config = () => ({
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASS,
   },
+  mailgun: {
+    apiKey: process.env.MAIL_GUN_API_KEY,
+    domain: process.env.MAIL_GUN_DOMAIN,
+  }
 });
 export default config;

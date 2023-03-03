@@ -51,6 +51,8 @@ export class User {
   @ApiProperty({ readOnly: true, required: false })
   @ManyToMany(() => Interview, {
     nullable: true,
+    onDelete: 'CASCADE',
+    orphanedRowAction: 'delete'
   })
   @JoinTable({
     name: 'user_interviews',

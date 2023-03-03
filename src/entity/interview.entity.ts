@@ -42,7 +42,6 @@ export class Interview {
   @JoinColumn({ name: 'positionId' })
   @ManyToOne(() => Position, (position) => position.interviews, {
     persistence: false,
-    onDelete: 'CASCADE',
   })
   position?: Position;
 
