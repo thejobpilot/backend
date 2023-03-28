@@ -22,6 +22,10 @@ import { Question } from '../entity/question.entity';
       field: 'interviewId',
       type: 'number',
     },
+    applicantEmail: {
+      field: 'applicantEmail',
+      type: 'string',
+    },
   },
   query: {
     join: {
@@ -30,7 +34,7 @@ import { Question } from '../entity/question.entity';
   },
 })
 @ApiTags('response')
-@Controller('/interview/:interviewId/response')
+@Controller('/interview/:interviewId/response/:applicantEmail')
 export class ResponseController implements CrudController<Response> {
   constructor(public service: ResponseService) {}
 }
