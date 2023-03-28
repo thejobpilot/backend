@@ -7,12 +7,13 @@ import { JwtStrategy } from './auth/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/user.module';
-import { InvitationEmailModule } from './invitationEmail/invitationEmail.module'
+import { InvitationEmailModule } from './invitationEmail/invitationEmail.module';
 import configuration from './config/configuration';
 import { PositionModule } from './positions/position.module';
 import { InterviewModule } from './interviews/interview.module';
 import { QuestionModule } from './questions/question.module';
-import {join} from "path";
+import { join } from 'path';
+import { ResponseModule } from './responses/response.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import {join} from "path";
     PositionModule,
     InterviewModule,
     QuestionModule,
+    ResponseModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forRoot({
       type: 'postgres',
