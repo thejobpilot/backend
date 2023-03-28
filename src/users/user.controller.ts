@@ -48,7 +48,7 @@ import { InvitationEmailService } from "../invitationEmail/invitationEmail.servi
     },
   },
   routes: {
-    only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase'],
+    only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase', 'getManyBase'],
   },
 })
 @ApiTags('users')

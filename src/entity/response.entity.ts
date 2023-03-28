@@ -23,7 +23,6 @@ export class Response {
   })
   interview: Interview;
 
-
   @IsOptional({ always: true })
   @IsNumber({}, { always: true })
   @Column({ nullable: true })
