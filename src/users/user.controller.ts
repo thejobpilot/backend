@@ -103,15 +103,39 @@ export class UserController implements CrudController<User> {
         );
         const interview = position.interviews.find(interview => interview.id === body.interviewId);
 
-        //const { positionName } = interview.position.name;
-
         if (!interview) {
           throw new HttpException('Interview for user position does not exist', HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         await this.acceptanceEmailService.sendAcceptanceEmail(email, user.fullName, interview.position.name);
         return;
+    }
+
+    @UseInterceptors(CrudRequestInterceptor)
+    @Post(':email/send-rejection')
+    async sendRejection(
+        @ParsedRequest() request: CrudRequest,
+        @Param('email') email: string,
+        @Body() body:  AssignInterviewDTO
+        ): Promise<void> {
+        const user = await this.service.findOne({ where: { email }, relations: ['position', 'interviews'] });
+
+        if (!user) {
+            throw new HttpException('User with that email does not exist', HttpStatus.NOT_FOUND);
+          }
+
+        const position = user.positions.find(position =>
+          position.interviews.some(interview => interview.id === body.interviewId)
+        );
+        const interview = position.interviews.find(interview => interview.id === body.interviewId);
+
+        if (!interview) {
+          throw new HttpException('Interview for user position does not exist', HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+        await this.rejectionEmailService.sendRejectionEmail(email, user.fullName, interview.position.name);
+        return;
+    }
 
   @UseInterceptors(CrudRequestInterceptor)
   @Delete(':email/remove-interview')
