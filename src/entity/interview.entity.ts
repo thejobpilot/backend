@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable, ManyToMany,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -12,6 +12,8 @@ import { Position } from './position.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional } from 'class-validator';
 import {User} from "./user.entity";
+import {Response} from "./response.entity";
+import {InterviewType} from "./interviewtype.entity";
 
 @Entity()
 export class Interview {
@@ -27,6 +29,11 @@ export class Interview {
   @IsNumber({}, { always: true })
   @Column()
   prepTime: number;
+
+  @ApiProperty({ required: true })
+  @IsNumber({}, { always: true })
+  @Column({nullable: true})
+  retakes: number;
 
   @IsOptional({ always: true })
   @IsNumber({}, { always: true })
@@ -51,4 +58,14 @@ export class Interview {
     nullable: true,
   })
   questions: Question[];
+
+  @ApiProperty({ readOnly: true, required: false })
+  @JoinColumn({ name: 'responseId' })
+  @OneToMany(() => Response, (response) => response.interview, {
+    nullable: true,
+  })
+  responses: Response[];
+
+  @Column({ nullable: true })
+  interviewType: InterviewType;
 }

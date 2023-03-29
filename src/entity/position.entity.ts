@@ -32,7 +32,7 @@ export class Position {
 
 
   @ApiProperty({ readOnly: true, required: false })
-  @ManyToOne(() => User, (interview) => interview.positions, {
+  @ManyToOne(() => User, (user) => user.positions, {
     nullable: true,
   })
   creator: User;
