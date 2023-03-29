@@ -14,6 +14,7 @@ import { InterviewModule } from './interviews/interview.module';
 import { QuestionModule } from './questions/question.module';
 import {join} from "path";
 import { AcceptanceEmailModule } from './acceptanceEmail/acceptanceEmail.module'
+import { RejectionEmailModule} from './rejectionEmail/rejectionEmail.module'
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AcceptanceEmailModule } from './acceptanceEmail/acceptanceEmail.module'
     UserModule,
     InvitationEmailModule,
     AcceptanceEmailModule,
+    RejectionEmailModule,
     PositionModule,
     InterviewModule,
     QuestionModule,
