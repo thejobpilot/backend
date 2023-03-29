@@ -29,7 +29,7 @@ import { ApiTags } from '@nestjs/swagger';
     },
   },
   routes: {
-    only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase'],
+    only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase', 'getManyBase'],
   },
 })
 @ApiTags('interview')

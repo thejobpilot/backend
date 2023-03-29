@@ -1,13 +1,14 @@
 import {
   Column,
-  Entity,
-  ManyToOne,
+  Entity, JoinColumn,
+  ManyToOne, OneToMany,
   PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Interview } from './interview.entity';
 import {ApiProperty} from "@nestjs/swagger";
 import {IsNumber, IsOptional} from "class-validator";
+import {VideoAnswer} from "./videoanswer.entity";
 
 @Entity()
 export class Question {
@@ -31,4 +32,10 @@ export class Question {
     nullable: true,
   })
   interview: Interview;
+
+  @ApiProperty({ readOnly: true, required: false })
+  @OneToMany(() => VideoAnswer, (videoAnswer) => videoAnswer.response, {
+    nullable: true,
+  })
+  videoAnswers: VideoAnswer[];
 }

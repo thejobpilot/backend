@@ -91,6 +91,4 @@ export class User {
   @Type((t) => Response)
   responses: Response[];
 
-  @Column({ nullable: true })
-  interviewType: InterviewType;
 }

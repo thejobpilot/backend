@@ -21,9 +21,6 @@ import {
 import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { ResponseService } from './response.service';
 import { Response } from '../entity/response.entity';
-import { Question } from '../entity/question.entity';
-import AssignInterviewDTO from '../dto/AssignInterviewDTO';
-import { User } from '../entity/user.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {S3UploaderService} from "./s3uploader.service";
 
@@ -32,7 +29,7 @@ import {S3UploaderService} from "./s3uploader.service";
     type: Response,
   },
   routes: {
-    only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase'],
+    only: ['createOneBase', 'updateOneBase', 'getOneBase', 'deleteOneBase', 'getManyBase'],
   },
   params: {
     id: {
@@ -89,7 +86,7 @@ export class ResponseController implements CrudController<Response> {
     )
     file,
   ): Promise<Response> {
-    const response = await this.service.findOne({
+    const response: Response = await this.service.findOne({
       where: { id: responseId },
       relations: ['interview', 'applicant'],
     });

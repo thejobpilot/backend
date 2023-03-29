@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable, ManyToMany,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,6 +13,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional } from 'class-validator';
 import {User} from "./user.entity";
 import {Response} from "./response.entity";
+import {InterviewType} from "./interviewtype.entity";
 
 @Entity()
 export class Interview {
@@ -64,4 +65,7 @@ export class Interview {
     nullable: true,
   })
   responses: Response[];
+
+  @Column({ nullable: true })
+  interviewType: InterviewType;
 }
