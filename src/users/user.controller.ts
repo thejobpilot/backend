@@ -18,6 +18,7 @@ import { Interview } from '../entity/interview.entity';
 import AssignInterviewDTO from "../dto/AssignInterviewDTO";
 import {InterviewsService} from "../interviews/interviews.service";
 import { InvitationEmailService } from "../invitationEmail/invitationEmail.service";
+import { AcceptanceEmailService } from "../acceptanceEmail/acceptanceEmail.service";
 
 @Crud({
   model: {
@@ -54,7 +55,8 @@ import { InvitationEmailService } from "../invitationEmail/invitationEmail.servi
 @ApiTags('users')
 @Controller('user')
 export class UserController implements CrudController<User> {
-  constructor(public service: UserService, public interviewService: InterviewsService, public emailService: InvitationEmailService) {}
+  constructor(public service: UserService, public interviewService: InterviewsService, public emailService: InvitationEmailService,
+              public acceptanceEmailService: AcceptanceEmailService) {}
 
   @UseInterceptors(CrudRequestInterceptor)
   @Post(':email/assign-interview')

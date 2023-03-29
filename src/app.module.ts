@@ -13,6 +13,7 @@ import { PositionModule } from './positions/position.module';
 import { InterviewModule } from './interviews/interview.module';
 import { QuestionModule } from './questions/question.module';
 import {join} from "path";
+import { AcceptanceEmailModule } from './acceptanceEmail/acceptanceEmail.module'
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import {join} from "path";
     AuthModule,
     UserModule,
     InvitationEmailModule,
+    AcceptanceEmailModule,
     PositionModule,
     InterviewModule,
     QuestionModule,
