@@ -68,4 +68,9 @@ export class Interview {
 
   @Column({ nullable: true })
   interviewType: InterviewType;
+
+  @ApiProperty({ required: true })
+  @IsNumber({}, { always: true })
+  @Column({nullable: true})
+  companyName: string;
 }

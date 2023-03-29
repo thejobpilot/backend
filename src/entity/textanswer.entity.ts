@@ -7,12 +7,11 @@ import {Question} from "./question.entity";
 @Entity()
 export class TextAnswer {
     @ApiProperty({readOnly: true, required: false})
-
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    videoURL: string;
+    answer: string;
 
     @IsOptional({always: true})
     @IsNumber({}, {always: true})
@@ -21,11 +20,10 @@ export class TextAnswer {
     responseId?: number;
 
     @ApiProperty({readOnly: true, required: false})
-    @ManyToOne(() => Response, (response) => response.videoAnswers, {
+    @ManyToOne(() => Response, (response) => response.textAnswers, {
         nullable: false,
     })
     response: Response;
-
 
     @IsOptional({always: true})
     @IsNumber({}, {always: true})
