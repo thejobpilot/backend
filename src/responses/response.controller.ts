@@ -48,6 +48,12 @@ import {S3UploaderService} from "./s3uploader.service";
   query: {
     join: {
       interview: {},
+      textAnswers: {
+        eager: true
+      },
+      videoAnswers: {
+        eager: true
+      },
     },
   },
 })
@@ -56,62 +62,7 @@ import {S3UploaderService} from "./s3uploader.service";
 export class ResponseController implements CrudController<Response> {
   constructor(
     public service: ResponseService,
-    private s3UploaderService: S3UploaderService,
   ) {}
 
-  @UseInterceptors(CrudRequestInterceptor, FileInterceptor('file'))
-  @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    description: 'File to upload',
-    type: 'multipart/form-data',
-    schema: {
-      type: 'object',
-      properties: {
-        file: {
-          type: 'string',
-          format: 'binary',
-        },
-      },
-    },
-  })
-  @Post('upload-video')
-  async assignInterview(
-    @ParsedRequest() request: CrudRequest,
-    @Param('interviewId') interviewId: number,
-    @Param('id') responseId: number,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [new FileTypeValidator({ fileType: 'video/webm' })],
-      }),
-    )
-    file,
-  ): Promise<Response> {
-    const response: Response = await this.service.findOne({
-      where: { id: responseId },
-      relations: ['interview', 'applicant'],
-    });
-    if (!response) {
-      throw new HttpException(
-        'Response with that ID does not exist',
-        HttpStatus.I_AM_A_TEAPOT,
-      );
-    }
 
-    //upload to AWS s3 bucket here
-    try {
-      const fileKey = `${responseId}/${file.originalname}`;
-      const fileUrl = await this.s3UploaderService.uploadFile(file, fileKey);
-
-      // Save the file URL to the response
-      //response.videoUrl = fileUrl;
-      //await this.service.update(responseId, response);
-    } catch (error) {
-      throw new HttpException(
-        `Error uploading file: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
-
-    return response;
-  }
 }

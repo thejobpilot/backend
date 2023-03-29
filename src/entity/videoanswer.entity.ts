@@ -26,7 +26,6 @@ export class VideoAnswer {
     })
     response: Response;
 
-
     @IsOptional({always: true})
     @IsNumber({}, {always: true})
     @Column({nullable: false})

@@ -15,6 +15,7 @@ import {join} from 'path';
 import {ResponseModule} from './responses/response.module';
 import {VideoAnswerModule} from "./videoanswer/videoanswer.module";
 import {PassportModule} from "@nestjs/passport";
+import {TextAnswerModule} from "./textanswer/textanswer.module";
 
 @Module({
     imports: [
@@ -27,6 +28,7 @@ import {PassportModule} from "@nestjs/passport";
         QuestionModule,
         ResponseModule,
         VideoAnswerModule,
+        TextAnswerModule,
         PassportModule.register({defaultStrategy: 'jwt'}),
         TypeOrmModule.forRoot({
             type: 'postgres',

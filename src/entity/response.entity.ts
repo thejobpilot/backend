@@ -10,6 +10,7 @@ import {ApiProperty} from "@nestjs/swagger";
 import {IsNumber, IsOptional} from "class-validator";
 import {User} from "./user.entity";
 import {VideoAnswer} from "./videoanswer.entity";
+import {TextAnswer} from "./textanswer.entity";
 
 @Entity()
 export class Response {
@@ -45,4 +46,10 @@ export class Response {
     nullable: true,
   })
   videoAnswers: VideoAnswer[];
+
+  @ApiProperty({ readOnly: true, required: false })
+  @OneToMany(() => TextAnswer, (textAnswer) => textAnswer.response, {
+    nullable: true,
+  })
+  textAnswers: TextAnswer[];
 }
