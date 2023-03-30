@@ -5,9 +5,11 @@ import { UserController } from './user.controller';
 import { User } from '../entity/user.entity';
 import {InterviewModule} from "../interviews/interview.module";
 import { InvitationEmailModule } from "../invitationEmail/invitationEmail.module";
+import { AcceptanceEmailModule } from "../acceptanceEmail/acceptanceEmail.module";
+import { RejectionEmailModule } from "../rejectionEmail/rejectionEmail.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), InterviewModule, InvitationEmailModule],
+  imports: [TypeOrmModule.forFeature([User]), InterviewModule, InvitationEmailModule, AcceptanceEmailModule, RejectionEmailModule],
   providers: [UserService],
   exports: [UserService],
   controllers: [UserController],
