@@ -16,6 +16,8 @@ import {ResponseModule} from './responses/response.module';
 import {VideoAnswerModule} from "./videoanswer/videoanswer.module";
 import {PassportModule} from "@nestjs/passport";
 import {TextAnswerModule} from "./textanswer/textanswer.module";
+import {UserInterviewRanking} from "./entity/userinterviewranking.entity";
+import {UserInterviewRankingModule} from "./userinterviewranking/userinterviewranking.module";
 
 @Module({
     imports: [
@@ -29,6 +31,7 @@ import {TextAnswerModule} from "./textanswer/textanswer.module";
         ResponseModule,
         VideoAnswerModule,
         TextAnswerModule,
+        UserInterviewRankingModule,
         PassportModule.register({defaultStrategy: 'jwt'}),
         TypeOrmModule.forRoot({
             type: 'postgres',

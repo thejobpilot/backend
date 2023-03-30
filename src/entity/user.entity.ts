@@ -15,6 +15,7 @@ import { Type } from 'class-transformer';
 import { Position } from './position.entity';
 import { InterviewType } from './interviewtype.entity';
 import {Response} from "./response.entity";
+import {UserInterviewRanking} from "./userinterviewranking.entity";
 
 @Entity()
 export class User {
@@ -91,4 +92,9 @@ export class User {
   @Type((t) => Response)
   responses: Response[];
 
+  @ApiProperty({ readOnly: true, required: false })
+  @OneToMany(() => UserInterviewRanking, (response) => response.user, {
+    nullable: true,
+  })
+  userInterviewRankings: UserInterviewRanking[];
 }

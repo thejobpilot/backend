@@ -13,7 +13,6 @@ import {VideoAnswer} from "./videoanswer.entity";
 @Entity()
 export class Question {
   @ApiProperty({ readOnly: true, required: false })
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,7 +24,6 @@ export class Question {
   @Column({ nullable: false })
   @ApiProperty({ readOnly: true, required: false })
   interviewId?: number;
-
 
   @ApiProperty({ readOnly: true, required: false })
   @ManyToOne(() => Interview, (interview) => interview.questions, {
