@@ -14,6 +14,7 @@ import { IsNumber, IsOptional } from 'class-validator';
 import {User} from "./user.entity";
 import {Response} from "./response.entity";
 import {InterviewType} from "./interviewtype.entity";
+import {UserInterviewRanking} from "./userinterviewranking.entity";
 
 @Entity()
 export class Interview {
@@ -34,6 +35,10 @@ export class Interview {
   @IsNumber({}, { always: true })
   @Column({nullable: true})
   retakes: number;
+
+  @ApiProperty({ required: false })
+  @Column({nullable: true})
+  videoURL: string;
 
   @IsOptional({ always: true })
   @IsNumber({}, { always: true })
@@ -72,4 +77,10 @@ export class Interview {
   @ApiProperty({ required: true })
   @Column({nullable: true})
   companyName: string;
+
+  @ApiProperty({ readOnly: true, required: false })
+  @OneToMany(() => UserInterviewRanking, (response) => response.interview, {
+    nullable: true,
+  })
+  userInterviewRankings: UserInterviewRanking[];
 }
