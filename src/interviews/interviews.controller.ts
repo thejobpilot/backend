@@ -23,6 +23,9 @@ import { ApiTags } from '@nestjs/swagger';
   query: {
     join: {
       position: {},
+      responses: {
+        eager: true
+      },
       questions: {
         eager: true
       }
