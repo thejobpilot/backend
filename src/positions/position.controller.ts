@@ -32,6 +32,9 @@ import { ApiTags } from '@nestjs/swagger';
       'interviews.questions': {
         eager: true,
       },
+      'interviews.responses': {
+        eager: true,
+      },
     },
   },
 })

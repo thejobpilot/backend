@@ -26,6 +26,10 @@ import {RejectionEmailService} from "../rejectionEmail/rejectionEmail.service";
             interviews: {
                 eager: true
             },
+            'interviews.responses': {
+                eager: true,
+                alias: 'interviewResponses'
+            },
             positions: {
                 eager: true
             },
@@ -34,6 +38,9 @@ import {RejectionEmailService} from "../rejectionEmail/rejectionEmail.service";
                 alias: "interviewQuestions",
             },
             'positions.interviews.questions': {
+                eager: true,
+            },
+            'positions.interviews.responses': {
                 eager: true,
             },
         },
