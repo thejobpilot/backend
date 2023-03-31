@@ -28,8 +28,13 @@ export class Interview {
 
   @ApiProperty({ required: true })
   @IsNumber({}, { always: true })
-  @Column()
+  @Column({default: 10})
   prepTime: number;
+
+  @ApiProperty({ required: true })
+  @IsNumber({}, { always: true })
+  @Column({nullable: true, default: 10})
+  interviewLength: number;
 
   @ApiProperty({ required: true })
   @IsNumber({}, { always: true })

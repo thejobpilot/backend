@@ -18,6 +18,14 @@ export class Response {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ nullable: true, default: 0 })
+  @ApiProperty({ readOnly: false, required: false })
+  score: number;
+
+  @Column({ nullable: true, default: "" })
+  @ApiProperty({ readOnly: false, required: false })
+  aiRating: string;
+
   @ApiProperty({ readOnly: true, required: true })
   @ManyToOne(() => Interview, (interview) => interview.responses, {
     nullable: false,
