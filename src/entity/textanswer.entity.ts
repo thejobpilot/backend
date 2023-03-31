@@ -11,6 +11,7 @@ export class TextAnswer {
     id: number;
 
     @Column()
+    @ApiProperty({readOnly: false, required: false})
     answer: string;
 
     @IsOptional({always: true})

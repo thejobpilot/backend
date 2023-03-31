@@ -41,12 +41,14 @@ export class Response {
   @ApiProperty({ readOnly: true, required: true })
   applicantEmail?: string;
 
+  @JoinColumn({ referencedColumnName: "interviews.responses.videoAnswers" }) // Add this line
   @ApiProperty({ readOnly: true, required: false })
   @OneToMany(() => VideoAnswer, (videoAnswer) => videoAnswer.response, {
     nullable: true,
   })
   videoAnswers: VideoAnswer[];
 
+  @JoinColumn({ referencedColumnName: "interviews.responses.textAnswers" }) // Add this line
   @ApiProperty({ readOnly: true, required: false })
   @OneToMany(() => TextAnswer, (textAnswer) => textAnswer.response, {
     nullable: true,

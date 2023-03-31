@@ -30,14 +30,6 @@ import {RejectionEmailService} from "../rejectionEmail/rejectionEmail.service";
                 eager: true,
                 alias: 'interviewResponses'
             },
-            'interviews.responses.textAnswers': {
-                eager: true,
-                alias: 'interviewResponsesTextAnswers'
-            },
-            'interviews.responses.videoAnswers': {
-                eager: true,
-                alias: 'interviewResponsesVideoAnswers'
-            },
             positions: {
                 eager: true
             },
@@ -49,7 +41,24 @@ import {RejectionEmailService} from "../rejectionEmail/rejectionEmail.service";
                 eager: true,
             },
             'positions.interviews.responses': {
+                alias: "interviewPositionResponses",
                 eager: true,
+            },
+            // 'interviewPositionResponses.textAnswers': {
+            //     eager: true,
+            //     alias: 'textAnswers'
+            // },
+            'positions.interviews.responses.textAnswers': {
+                eager: true,
+                alias: 'textAnswers2'
+            },
+            // 'interviewPositionResponses.videoAnswers': {
+            //     eager: true,
+            //     alias: 'videoAnswers'
+            // },
+            'positions.interviews.responses.videoAnswers': {
+                eager: true,
+                alias: 'videoAnswers2'
             },
         },
     },
