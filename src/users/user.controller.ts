@@ -30,6 +30,14 @@ import {RejectionEmailService} from "../rejectionEmail/rejectionEmail.service";
                 eager: true,
                 alias: 'interviewResponses'
             },
+            'interviews.responses.textAnswers': {
+                eager: true,
+                alias: 'interviewResponsesTextAnswers'
+            },
+            'interviews.responses.videoAnswers': {
+                eager: true,
+                alias: 'interviewResponsesVideoAnswers'
+            },
             positions: {
                 eager: true
             },
