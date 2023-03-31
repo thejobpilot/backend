@@ -51,7 +51,6 @@ export class TextAnswerController implements CrudController<TextAnswer> {
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: TextAnswer,
     ) {
-        const { ChatGPTAPI } = await import('chatgpt')
         let response = await this.responseService.findOne({where: {id: dto.responseId}});
         // let apiKey = process.env.OPENAI_API_KEY;
         // console.log(apiKey)
