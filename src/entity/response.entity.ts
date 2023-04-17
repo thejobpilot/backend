@@ -62,4 +62,14 @@ export class Response {
     nullable: true,
   })
   textAnswers: TextAnswer[];
+
+  @ApiProperty({ required: true })
+  @IsNumber({}, { always: true })
+  @Column({default: 10, nullable: true})
+  endTime: number;
+
+  @ApiProperty({ required: true })
+  @IsNumber({}, { always: true })
+  @Column({default: 10, nullable: true})
+  startTime: number;
 }
