@@ -64,12 +64,10 @@ export class Response {
   textAnswers: TextAnswer[];
 
   @ApiProperty({ required: false })
-  @IsNumber({}, { always: true })
   @Column({default: 10, nullable: true})
   endTime: number;
 
   @ApiProperty({ required: false })
-  @IsNumber({}, { always: true })
   @Column({default: 10, nullable: true})
   startTime: number;
 }
