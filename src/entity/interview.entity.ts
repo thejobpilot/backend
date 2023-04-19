@@ -11,10 +11,10 @@ import { Question } from './question.entity';
 import { Position } from './position.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsOptional } from 'class-validator';
-import {User} from "./user.entity";
-import {Response} from "./response.entity";
-import {InterviewType} from "./interviewtype.entity";
-import {UserInterviewRanking} from "./userinterviewranking.entity";
+import { User } from './user.entity';
+import { Response } from './response.entity';
+import { InterviewType } from './interviewtype.entity';
+import { UserInterviewRanking } from './userinterviewranking.entity';
 
 @Entity()
 export class Interview {
@@ -26,23 +26,23 @@ export class Interview {
   @Column()
   name: string;
 
-  @ApiProperty({ required: true })
-  @IsNumber({}, { always: true })
-  @Column({default: 10})
+  @ApiProperty({ required: false })
+  @IsNumber()
+  @Column({ default: 0, nullable: true })
   prepTime: number;
 
-  @ApiProperty({ required: true })
-  @IsNumber({}, { always: true })
-  @Column({nullable: true, default: 10})
+  @ApiProperty({ required: false })
+  @IsNumber({})
+  @Column({ nullable: true, default: 10 })
   interviewLength: number;
 
-  @ApiProperty({ required: true })
-  @IsNumber({}, { always: true })
-  @Column({nullable: true})
+  @ApiProperty({ required: false })
+  @IsNumber()
+  @Column({ nullable: true })
   retakes: number;
 
   @ApiProperty({ required: false })
-  @Column({nullable: true})
+  @Column({ nullable: true })
   videoURL: string;
 
   @IsOptional({ always: true })
@@ -80,7 +80,7 @@ export class Interview {
   interviewType: InterviewType;
 
   @ApiProperty({ required: true })
-  @Column({nullable: true})
+  @Column({ nullable: true })
   companyName: string;
 
   @ApiProperty({ readOnly: true, required: false })

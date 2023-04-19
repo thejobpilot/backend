@@ -24,7 +24,6 @@ import { ApiTags } from '@nestjs/swagger';
   },
   query: {
     alwaysPaginate: false,
-    softDelete: true,
     join: {
       interviews: {
         eager: true,
