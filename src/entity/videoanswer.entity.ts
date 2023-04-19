@@ -11,7 +11,8 @@ export class VideoAnswer {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @ApiProperty({readOnly: true, required: false})
+    @Column({nullable: true})
     videoURL: string;
 
     @IsOptional({always: true})
