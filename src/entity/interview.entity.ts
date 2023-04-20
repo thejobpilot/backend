@@ -66,6 +66,8 @@ export class Interview {
   @JoinColumn({ name: 'questionId' })
   @OneToMany(() => Question, (question) => question.interview, {
     nullable: true,
+    cascade: true,
+    onDelete: 'CASCADE',
   })
   questions: Question[];
 
@@ -73,6 +75,8 @@ export class Interview {
   @JoinColumn({ name: 'responseId' })
   @OneToMany(() => Response, (response) => response.interview, {
     nullable: true,
+    cascade: true,
+    onDelete: 'CASCADE',
   })
   responses: Response[];
 

@@ -29,6 +29,7 @@ export class Response {
   @ApiProperty({ readOnly: true, required: true })
   @ManyToOne(() => Interview, (interview) => interview.responses, {
     nullable: false,
+    onDelete: 'CASCADE', // Add this line
   })
   interview: Interview;
 
