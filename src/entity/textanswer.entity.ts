@@ -39,4 +39,8 @@ export class TextAnswer {
         onDelete: 'CASCADE',
     })
     question: Question;
+
+    @Column({ nullable: true, default: "" })
+    @ApiProperty({ readOnly: false, required: false })
+    aiRating: string;
 }
