@@ -7,7 +7,6 @@ import {Question} from "./question.entity";
 @Entity()
 export class VideoAnswer {
     @ApiProperty({readOnly: true, required: false})
-
     @PrimaryGeneratedColumn()
     id: number;
 

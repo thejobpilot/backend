@@ -5,7 +5,7 @@ import {
     HttpStatus,
     Param,
     ParseFilePipe,
-    Post,
+    Post, Query,
     UploadedFile,
     UseInterceptors,
 } from '@nestjs/common';
@@ -72,7 +72,7 @@ export class VideoAnswerController implements CrudController<VideoAnswer> {
     @Post('upload-video')
     async assignInterview(
         @ParsedRequest() request: CrudRequest,
-        @Param('id') videoAnswerId: number,
+        @Query('id') videoAnswerId: number,
         @Param('responseId') responseId: number,
         @Param('questionId') questionId: number,
         @UploadedFile(
@@ -93,10 +93,17 @@ export class VideoAnswerController implements CrudController<VideoAnswer> {
 
         //upload to AWS s3 bucket here
         try {
-            const fileKey = `${uuidv4()}`;
+            const fileKey = `${uuidv4()}.webm`;
             // Save the file URL to the response
             response.videoURL = await this.s3UploaderService.uploadFile(file, fileKey);
+            console.log("Before")
+            console.log(response)
             await this.service.updateOne(request, response);
+            console.log("After")
+            console.log(await this.service.findOne({
+                where: {id: videoAnswerId},
+                relations: ['response', 'question'],
+            }))
         } catch (error) {
             throw new HttpException(
                 `Error uploading file: ${error.message}`,
