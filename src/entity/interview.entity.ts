@@ -45,6 +45,10 @@ export class Interview {
   @Column({ nullable: true })
   videoURL: string;
 
+  @ApiProperty({ required: false })
+  @Column({ nullable: true, default: false })
+  showScoreToUser: boolean;
+
   @IsOptional({ always: true })
   @IsNumber({}, { always: true })
   @Column({ nullable: false })
