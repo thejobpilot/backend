@@ -6,7 +6,6 @@ import {TextAnswerService} from './textanswer.service';
 import {TextAnswer} from "../entity/textanswer.entity";
 import {ResponseService} from "../responses/response.service";
 import {QuestionService} from "../questions/question.service";
-
 @Crud({
     model: {
         type: TextAnswer,
@@ -53,6 +52,7 @@ export class TextAnswerController implements CrudController<TextAnswer> {
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: TextAnswer,
     ) {
+        require('isomorphic-fetch');
         let question = await this.questionService.findOne({where: {id: dto.questionId}});
         const importDynamic = new Function('modulePath', 'return import(modulePath)')
         const {ChatGPTAPI} = await importDynamic('chatgpt')

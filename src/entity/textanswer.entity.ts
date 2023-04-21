@@ -13,7 +13,7 @@ export class TextAnswer {
     @Column()
     @ApiProperty({readOnly: false, required: false})
     answer: string;
- 
+
     @IsOptional({always: true})
     @IsNumber({}, {always: true})
     @Column({nullable: false})

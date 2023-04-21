@@ -34,6 +34,7 @@
     "chatgpt": "^5.2.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "isomorphic-fetch": "^3.0.0",
     "jwks-rsa": "^3.0.1",
     "mysql2": "^3.1.2",
     "openai": "^3.2.1",
@@ -44,6 +45,7 @@
     "rxjs": "^7.2.0",
     "ts-mailgun": "^0.5.1",
     "typeorm": "^0.3.12",
+    "unfetch": "^5.0.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
