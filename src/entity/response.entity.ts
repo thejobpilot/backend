@@ -54,6 +54,8 @@ export class Response {
   @ApiProperty({ readOnly: true, required: false })
   @OneToMany(() => VideoAnswer, (videoAnswer) => videoAnswer.response, {
     nullable: true,
+    onDelete: 'CASCADE',
+    cascade: true
   })
   videoAnswers: VideoAnswer[];
 
@@ -61,6 +63,8 @@ export class Response {
   @ApiProperty({ readOnly: true, required: false })
   @OneToMany(() => TextAnswer, (textAnswer) => textAnswer.response, {
     nullable: true,
+    onDelete: 'CASCADE',
+    cascade: true
   })
   textAnswers: TextAnswer[];
 

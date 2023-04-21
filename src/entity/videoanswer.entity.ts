@@ -24,6 +24,7 @@ export class VideoAnswer {
     @ApiProperty({readOnly: true, required: false})
     @ManyToOne(() => Response, (response) => response.videoAnswers, {
         nullable: false,
+        onDelete: 'CASCADE',
     })
     response: Response;
 
@@ -36,6 +37,7 @@ export class VideoAnswer {
     @ApiProperty({readOnly: true, required: false})
     @ManyToOne(() => Question, (question) => question.videoAnswers, {
         nullable: false,
+        onDelete: 'CASCADE',
     })
     question: Question;
 }
