@@ -195,7 +195,7 @@ export class UserController implements CrudController<User> {
             throw new HttpException('Interview for user position does not exist', HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        await this.submissionEmailService.sendSubmissionEmail(email, user.fullName, interview.position.name);
+        await this.submissionEmailService.sendSubmissionEmail(email, user.fullName, interview.position.name, interview.companyName);
         return;
     }
 }
