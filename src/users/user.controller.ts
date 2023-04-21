@@ -9,6 +9,7 @@ import {InterviewsService} from "../interviews/interviews.service";
 import {InvitationEmailService} from "../invitationEmail/invitationEmail.service";
 import {AcceptanceEmailService} from "../acceptanceEmail/acceptanceEmail.service";
 import {RejectionEmailService} from "../rejectionEmail/rejectionEmail.service";
+import {SubmissionEmailService} from "./submissionemail.service";
 
 @Crud({
     model: {
@@ -82,7 +83,7 @@ import {RejectionEmailService} from "../rejectionEmail/rejectionEmail.service";
 @Controller('user')
 export class UserController implements CrudController<User> {
     constructor(public service: UserService, public interviewService: InterviewsService, public emailService: InvitationEmailService,
-                public acceptanceEmailService: AcceptanceEmailService, public rejectionEmailService: RejectionEmailService) {
+                public acceptanceEmailService: AcceptanceEmailService, public rejectionEmailService: RejectionEmailService, public submissionEmailService: SubmissionEmailService) {
     }
 
     @UseInterceptors(CrudRequestInterceptor)
@@ -173,5 +174,28 @@ export class UserController implements CrudController<User> {
             await this.service.updateOne(request, user);
         }
         return user;
+    }
+
+
+    @UseInterceptors(CrudRequestInterceptor)
+    @Post(':email/send-submission')
+    async sendSubmission(
+        @ParsedRequest() request: CrudRequest,
+        @Param('email') email: string,
+        @Body() body: AssignInterviewDTO
+    ): Promise<void> {
+        const user = await this.service.findOne({where: {email: email}, relations: ['interviews']});
+
+        if (!user) {
+            throw new HttpException('User with that email does not exist', HttpStatus.NOT_FOUND);
+        }
+
+        const interview = await this.interviewService.findOne({where: {id: body.interviewId}, relations: ['position']});
+        if (!interview) {
+            throw new HttpException('Interview for user position does not exist', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        await this.submissionEmailService.sendSubmissionEmail(email, user.fullName, interview.position.name);
+        return;
     }
 }

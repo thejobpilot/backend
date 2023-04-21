@@ -7,10 +7,11 @@ import {InterviewModule} from "../interviews/interview.module";
 import { InvitationEmailModule } from "../invitationEmail/invitationEmail.module";
 import { AcceptanceEmailModule } from "../acceptanceEmail/acceptanceEmail.module";
 import { RejectionEmailModule } from "../rejectionEmail/rejectionEmail.module";
+import {SubmissionEmailService} from "./submissionemail.service";
 
 @Module({
   imports: [TypeOrmModule.forFeature([User]), InterviewModule, InvitationEmailModule, AcceptanceEmailModule, RejectionEmailModule],
-  providers: [UserService],
+  providers: [UserService, SubmissionEmailService],
   exports: [UserService],
   controllers: [UserController],
 })
